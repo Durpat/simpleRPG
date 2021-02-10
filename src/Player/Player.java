@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Player {
     private String name;
     private int lvl = 1;
-    private int skillPoints = 5; //Skill Points
+    private int characterPoints = 5; //Skill Points
     private int endr = 1; //Endurance - HP
     private int intl = 1; //Intelligence - MP
     private int str = 1; //Strength
@@ -32,17 +32,51 @@ public class Player {
     }
 
     public void profile() {
+        boolean viewProfile = true;
+        do {
         System.out.println("====================================");
         System.out.println("               " + getName().toUpperCase());
         System.out.println("Poziom " + getLvl());
-        System.out.println("Dostępnę punkty: " + getSkillPoints());
+        System.out.println("Dostępnę punkty: " + getcharacterPoints());
         System.out.println("------------------------------------");
         System.out.println("Endurance: " + getEndr());
-        System.out.println("Intelligence: " + getIntl());
         System.out.println("Strength: " + getStr());
+        System.out.println("Intelligence: " + getIntl());
         System.out.println("Dexterity: " + getDex());
         System.out.println("Agility: " +getAgl());
-        System.out.println("====================================");
+        System.out.println("------------------------------------");
+        System.out.println("Ulepsz:");
+        System.out.println("[1] Endurance [2] Strength [3] Intelligence");
+        System.out.println("[4] Dexterity [5] Agility  [Q] Powrót");
+        char controller =  scanner.nextLine().toLowerCase().charAt(0);
+        if (controller == 'q') {
+            viewProfile = false;
+        }
+        switch (controller) {
+            case '1' -> endrUp();
+            case '2' -> strUp();
+            case '3' -> intlUp();
+            case '4' -> dexUp();
+            case '5' -> aglUp();
+        }
+        } while (viewProfile);
+    }
+
+    public void assignPoints(){
+        System.out.println("Przypisz Punkty");
+        System.out.println("------------------------------------");
+        do {
+            System.out.println("Dostępne punkty: " + getcharacterPoints());
+            System.out.println("[1] Endurance - " +  getEndr());
+            System.out.println("[2] Strength - " + getStr());
+            System.out.println("[3] Intelligence - " + getIntl());
+            System.out.println("[4] Dexterity - " + getDex());
+            System.out.println("[5] Agility - " +getAgl());
+            System.out.println("[Q] Wyjście");
+
+            System.out.print("Zwiększ: ");
+
+        } while (characterPoints > 0);
     }
 
     public String getName() {
@@ -55,15 +89,15 @@ public class Player {
 
     public void lvlUp() {
         lvl++;
-        skillPoints++;
+        characterPoints++;
     }
 
-    public int getSkillPoints() {
-        return skillPoints;
+    public int getcharacterPoints() {
+        return characterPoints;
     }
 
-    public void setSkillPoints(int skillPoints) {
-        this.skillPoints = skillPoints;
+    public void setcharacterPoints(int characterPoints) {
+        this.characterPoints = characterPoints;
     }
 
     public int getEndr() {
@@ -71,8 +105,8 @@ public class Player {
     }
 
     public void endrUp() {
-        if(skillPoints != 0) {
-            skillPoints--;
+        if(characterPoints > 0) {
+            characterPoints--;
             endr++;
         }
     }
@@ -82,8 +116,8 @@ public class Player {
     }
 
     public void strUp() {
-        if(skillPoints != 0) {
-            skillPoints--;
+        if(characterPoints > 0) {
+            characterPoints--;
             str++;
         }
     }
@@ -93,8 +127,8 @@ public class Player {
     }
 
     public void intlUp() {
-        if(skillPoints != 0) {
-            skillPoints--;
+        if(characterPoints > 0) {
+            characterPoints--;
             intl++;
         }
     }
@@ -104,8 +138,8 @@ public class Player {
     }
 
     public void dexUp() {
-        if(skillPoints != 0) {
-            skillPoints--;
+        if(characterPoints > 0) {
+            characterPoints--;
             dex++;
         }
     }
@@ -115,8 +149,8 @@ public class Player {
     }
 
     public void aglUp() {
-        if(skillPoints != 0) {
-            skillPoints--;
+        if(characterPoints > 0) {
+            characterPoints--;
             agl++;
         }
     }
